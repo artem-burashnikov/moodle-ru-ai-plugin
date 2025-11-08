@@ -1,0 +1,48 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_ai_manager/confirm_ai_usage
+
+    Template for the confirmation page.
+
+    Example context (json):
+    {
+        "termsofuse": "This are the terms of use which you need to accept",
+        "showtermsofuse": true,
+        "confirmationrequired": true
+    }
+}}
+<div class="local_ai_manager-confirm_ai_usage mt-0 mb-5">
+    <div class="text-center">
+            <h2>{{#str}} userconfirmation_headline, local_ai_manager {{/str}}</h2>
+        {{#confirmationrequired}}
+            {{> local_ai_manager/termsofuse }}
+            {{^showtermsofuse}}
+                <p>{{#str}}privacy_terms_missing_enable_anyway, local_ai_manager{{/str}}</p>
+            {{/showtermsofuse}}
+        {{/confirmationrequired}}
+        {{^confirmationrequired}}
+            <div class="alert alert-info mt-5"><strong>{{#str}}confirmationnotrequired, local_ai_manager{{/str}}</strong></div>
+            <div class="mt-5 text-center">
+                {{#showtermsofuse}}
+                    <a class="btn btn-primary m-2" href="{{wwwroot}}/local/ai_manager/ai_info.php">{{#str}}toinfopage, local_ai_manager{{/str}}</a>
+                {{/showtermsofuse}}
+                <a class="btn btn-secondary m-2" href="{{wwwroot}}/my">{{#str}}backtodashboard, local_ai_manager{{/str}}</a>
+            </div>
+        {{/confirmationrequired}}
+    </div>
+</div>
